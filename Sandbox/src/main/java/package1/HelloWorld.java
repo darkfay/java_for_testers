@@ -1,15 +1,16 @@
 package package1;
 
+
+
 class HelloWorld {
     public static void main(String[] args) {
         hello("world");
 
-         double len=5;
-         System.out.println("Площадь квадрата cо cтороной " + len + " = " + area(len));
+        Square s = new Square (5);
+         System.out.println("Площадь квадрата cо cтороной " + s.l + " = " + s.area());
 
-         double a=4;
-         double b=6;
-        System.out.println("Площадь прмоугольника cо cторонами " + a + " и " + b + " = " + area(a, b));
+         Rectangle r = new Rectangle(4,6);
+        System.out.println("Площадь прмоугольника cо cторонами " + r.a + " и " + r.b + " = " + r.area());
 
     }
 
@@ -20,11 +21,7 @@ class HelloWorld {
         System.out.println("Hello, "+somebody+"!");
     }
 
-    public  static  double area(double l) {
-         return l*l;
-    }
 
-    public static double area(double a, double b) {
-        return a*b;
-    }
+
+
 }
