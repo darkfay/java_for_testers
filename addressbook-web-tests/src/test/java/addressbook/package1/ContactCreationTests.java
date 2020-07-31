@@ -6,18 +6,18 @@ import static org.testng.Assert.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class GroupCreationTests {
+public class ContactCreationTests {
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
 
-  @BeforeMethod(alwaysRun = true)
+  @BeforeClass(alwaysRun = true)
   public void setUp() throws Exception {
     driver = new FirefoxDriver();
     baseUrl = "https://www.google.com/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-    driver.get("http://localhost/addressbook/group.php");
+    driver.get("http://localhost/addressbook/edit.php");
     login("admin", "secret");
   }
 
@@ -31,38 +31,45 @@ public class GroupCreationTests {
   }
 
   @Test
-  public void testGroupCreationTests() throws Exception {
+  public void testContactCreationTests() throws Exception {
 
-    newGroupCreation();
-    fillGroupForm(new GroupData("James.Barry"));
-    submitGroupCreation();
-    returnToGroupPage();
-    logOut();
+    fillContract(new ContactData("test", "test", "test", "test", "test"));
+    submitContract();
+    goToHomePage();
+    logout();
   }
 
-  private void logOut() {
+  private void logout() {
     driver.findElement(By.linkText("Logout")).click();
   }
 
-  private void returnToGroupPage() {
-    driver.findElement(By.linkText("group page")).click();
+  private void goToHomePage() {
+    driver.findElement(By.linkText("home")).click();
   }
 
-  private void submitGroupCreation() {
-    driver.findElement(By.name("submit")).click();
+  private void submitContract() {
+    driver.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
   }
 
-  private void fillGroupForm(GroupData groupData) {
-    driver.findElement(By.name("group_name")).click();
-    driver.findElement(By.name("group_name")).clear();
-    driver.findElement(By.name("group_name")).sendKeys(groupData.getGroupName());
+  private void fillContract(ContactData contactData) {
+    driver.findElement(By.name("firstname")).click();
+    driver.findElement(By.name("firstname")).clear();
+    driver.findElement(By.name("firstname")).sendKeys(contactData.getFirstname());
+    driver.findElement(By.name("lastname")).click();
+    driver.findElement(By.name("lastname")).clear();
+    driver.findElement(By.name("lastname")).sendKeys(contactData.getLastname());
+    driver.findElement(By.name("company")).click();
+    driver.findElement(By.name("company")).clear();
+    driver.findElement(By.name("company")).sendKeys(contactData.getCompany());
+    driver.findElement(By.name("address")).click();
+    driver.findElement(By.name("address")).clear();
+    driver.findElement(By.name("address")).sendKeys(contactData.getAddress());
+    driver.findElement(By.name("mobile")).click();
+    driver.findElement(By.name("mobile")).clear();
+    driver.findElement(By.name("mobile")).sendKeys(contactData.getMobile());
   }
 
-  private void newGroupCreation() {
-    driver.findElement(By.name("new")).click();
-  }
-
-  @AfterMethod(alwaysRun = true)
+  @AfterClass(alwaysRun = true)
   public void tearDown() throws Exception {
     driver.quit();
     String verificationErrorString = verificationErrors.toString();
