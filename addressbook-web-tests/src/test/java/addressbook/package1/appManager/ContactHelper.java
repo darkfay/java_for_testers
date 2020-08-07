@@ -10,15 +10,28 @@ public class ContactHelper extends  HelperBase{
         super(driver);
     }
 
-    public void submitContract() {
+    public void submitContact() {
         click(By.xpath("(//input[@name='submit'])[2]"));
     }
 
-    public void fillContract(ContactData contactData) {
+    public void fillContact(ContactData contactData) {
         type(By.name("firstname"), contactData.getFirstname());
         type(By.name("lastname"), contactData.getLastname());
         type(By.name("company"), contactData.getCompany());
         type(By.name("address"), contactData.getAddress());
         type(By.name("mobile"), contactData.getMobile());
+    }
+    public void selectContact() {
+        click(By.name("selected[]"));
+    }
+
+    public void deleteSelectedContacts() {
+        click(By.xpath("(//input[@value='Delete'])"));
+    }
+
+    public void editContact(String firstname) {
+        click(By.xpath("//img[@alt='Edit']"));
+        type(By.name("firstname"), firstname);
+        click(By.xpath("(//input[@name='update'])[2]"));
     }
 }
