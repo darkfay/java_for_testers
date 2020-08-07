@@ -67,12 +67,12 @@ public class ApplicationManager {
         }
     }
 
-    public void deleteSelectedGroups() {
-        driver.findElement(By.xpath("(//input[@name='delete'])[2]")).click();
-    }
-
     public GroupHelper getGroupHelper() {
         return groupHelper;
+    }
+
+    public ContactHelper getContactHelper() {
+        return contactHelper;
     }
 
     public void goToHomePage() {
@@ -81,6 +81,11 @@ public class ApplicationManager {
     }
     public void goToAddNewPage() {
         driver.findElement(By.linkText("add new")).click();
+
+    }
+
+    public void goToGroupPage() {
+        driver.findElement(By.linkText("groups")).click();
 
     }
 
