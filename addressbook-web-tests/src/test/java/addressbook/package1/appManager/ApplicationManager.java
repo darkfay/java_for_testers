@@ -1,7 +1,13 @@
 package addressbook.package1.appManager;
 
 import org.openqa.selenium.*;
+//import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.BrowserType;
+import java.io.File;
+import org.openqa.selenium.chrome.ChromeDriverService;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,13 +21,28 @@ public class ApplicationManager {
     public String baseUrl;
     public boolean acceptNextAlert = true;
     public StringBuffer verificationErrors = new StringBuffer();
+    private String browser;
 
     public ApplicationManager() {
     }
 
+    public ApplicationManager(String browser) {
+        this.browser = browser;
+    }
+
     public void init() {
-        driver = new FirefoxDriver();
-        baseUrl = "https://www.google.com/";
+   
+        if (browser.equals(BrowserType.FIREFOX)) {
+            driver = new FirefoxDriver();
+        } else if (browser.equals(BrowserType.CHROME)) {
+//            driver = new ChromeDriver();
+            ChromeDriverService service = new ChromeDriverService.Builder()
+                    .withLogFile(new File("chromedriver.log")).withVerbose(true).build();
+            driver = new ChromeDriver(service);
+        } else if (browser.equals(BrowserType.IE)) {
+            driver = new InternetExplorerDriver();
+        }
+//        baseUrl = "https://www.google.com/";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.get("http://localhost/addressbook/group.php");
         groupHelper = new GroupHelper(driver);
@@ -79,6 +100,7 @@ public class ApplicationManager {
         driver.findElement(By.linkText("home")).click();
 
     }
+
     public void goToAddNewPage() {
         driver.findElement(By.linkText("add new")).click();
 
