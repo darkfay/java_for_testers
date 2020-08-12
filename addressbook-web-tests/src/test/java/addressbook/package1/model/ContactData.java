@@ -7,12 +7,14 @@ public class ContactData {
     private final String address;
     private final String mobile;
 
+
     public ContactData(String firstname, String lastname, String company, String address, String mobile) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.company = company;
         this.address = address;
         this.mobile = mobile;
+
     }
 
     public String getFirstname() {

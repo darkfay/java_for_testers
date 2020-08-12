@@ -35,15 +35,15 @@ public class ApplicationManager {
         if (browser.equals(BrowserType.FIREFOX)) {
             driver = new FirefoxDriver();
         } else if (browser.equals(BrowserType.CHROME)) {
-//            driver = new ChromeDriver();
-            ChromeDriverService service = new ChromeDriverService.Builder()
-                    .withLogFile(new File("chromedriver.log")).withVerbose(true).build();
-            driver = new ChromeDriver(service);
+            driver = new ChromeDriver();
+//            ChromeDriverService service = new ChromeDriverService.Builder()
+//                    .withLogFile(new File("chromedriver.log")).withVerbose(true).build();
+//            driver = new ChromeDriver(service);
         } else if (browser.equals(BrowserType.IE)) {
             driver = new InternetExplorerDriver();
         }
 //        baseUrl = "https://www.google.com/";
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.get("http://localhost/addressbook/group.php");
         groupHelper = new GroupHelper(driver);
         sessionHelper = new SessionHelper(driver);
@@ -98,11 +98,6 @@ public class ApplicationManager {
 
     public void goToHomePage() {
         driver.findElement(By.linkText("home")).click();
-
-    }
-
-    public void goToAddNewPage() {
-        driver.findElement(By.linkText("add new")).click();
 
     }
 
