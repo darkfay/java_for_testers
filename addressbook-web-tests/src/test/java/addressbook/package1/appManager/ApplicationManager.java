@@ -44,7 +44,7 @@ public class ApplicationManager {
         }
 //        baseUrl = "https://www.google.com/";
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        driver.get("http://localhost/addressbook/group.php");
+        driver.get("http://localhost/addressbook");
         groupHelper = new GroupHelper(driver);
         sessionHelper = new SessionHelper(driver);
         contactHelper = new ContactHelper(driver);
