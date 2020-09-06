@@ -4,13 +4,13 @@ import addressbook.package1.model.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.BrowserType;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase {
-
 
 
     public ContactHelper(WebDriver driver) {
@@ -24,9 +24,9 @@ public class ContactHelper extends HelperBase {
     public void fillContact(ContactData contactData) {
         type(By.name("firstname"), contactData.getFirstname());
         type(By.name("lastname"), contactData.getLastname());
-        type(By.name("company"), contactData.getCompany());
+        type(By.name("email"), contactData.getEmail());
         type(By.name("address"), contactData.getAddress());
-        type(By.name("mobile"), contactData.getMobile());
+        type(By.name("mobile"), contactData.getPhone());
     }
 
     public void selectContact(int index) {
@@ -40,6 +40,7 @@ public class ContactHelper extends HelperBase {
     public void editContact(ContactData contact, int index) {
         driver.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
         type(By.name("firstname"), contact.getFirstname());
+        type(By.name("lastname"), contact.getLastname());
         click(By.xpath("(//input[@name='update'])[2]"));
     }
 
@@ -66,19 +67,35 @@ public class ContactHelper extends HelperBase {
 
     public List<ContactData> getContactList() {
         List<ContactData> contacts = new ArrayList<ContactData>();
-        int count = driver.findElements(By.xpath("//img[@alt='Edit']")).size();
-        for (int i = 0; i < count; i++) {
-            List<WebElement> elements = driver.findElements(By.cssSelector("tr[name='entry']"));
-            int id = Integer.parseInt(elements.get(i).findElement(By.tagName("input")).getAttribute("value"));
-            driver.findElements(By.xpath("//img[@alt='Edit']")).get(i).click();
-            String firstname = driver.findElement(By.name("firstname")).getAttribute("value");
-            String lastname = driver.findElement(By.name("lastname")).getAttribute("value");
-            String company = driver.findElement(By.name("company")).getAttribute("value");
-            String address = driver.findElement(By.name("address")).getAttribute("value");
-            String mobile = driver.findElement(By.name("mobile")).getAttribute("value");
-            ContactData contact = new ContactData(firstname, lastname, company, address, mobile, id);
+        List<WebElement> rows = driver.findElements(By.cssSelector("tr[name='entry']"));
+        for (WebElement row : rows) {
+            List<WebElement> cells = row.findElements(By.tagName("td"));
+            String lastname = cells.get(1).getText();
+            String firstname = cells.get(2).getText();
+//            String address = cells.get(3).getText();
+//            String email = cells.get(5).getText();
+//            String phone = cells.get(6).getText();
+            int id = Integer.parseInt(row.findElement(By.tagName("input")).getAttribute("value"));
+            ContactData contact = new ContactData (firstname, lastname, null, null, null, id);
             contacts.add(contact);
-            driver.findElement(By.linkText("home")).click();
+        }
+        return contacts;
+    }
+
+    public Set<ContactData> all() {
+        Set<ContactData> contacts = new HashSet<>();
+        List<WebElement> elements = driver.findElements(By.cssSelector("tr[name='entry']"));
+        for (WebElement element : elements) {
+            List<WebElement> cells = driver.findElements(By.tagName("td"));
+            String firstname = cells.get(1).getText();
+            String lastname = cells.get(2).getText();
+            String address = cells.get(3).getText();
+            String email = cells.get(4).getText();
+            String phone = cells.get(5).getText();
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            ContactData contact = new ContactData(firstname, lastname, phone, address, email, id);
+            contacts.add(contact);
+//            driver.findElement(By.linkText("home")).click();
         }
 
         return contacts;

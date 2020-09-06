@@ -3,33 +3,19 @@ package addressbook.package1.model;
 import java.util.Objects;
 
 public class ContactData {
-    private final String firstname;
-    private final String lastname;
-    private final String company;
-    private final String address;
-    private final String mobile;
+    private String firstname;
+    private String lastname;
+    private String email;
+    private String address;
+    private String phone;
     private int id;
 
-
-    @Override
-    public String toString() {
-        return "ContactData{" +
-                "firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", company='" + company + '\'' +
-                ", address='" + address + '\'' +
-                ", mobile='" + mobile + '\'' +
-                ", id='" + id + '\'' +
-                '}';
-    }
-
-
-    public ContactData(String firstname, String lastname, String company, String address, String mobile, int id) {
+    public ContactData(String firstname, String lastname, String email, String address, String phone, int id) {
         this.firstname = firstname;
         this.lastname = lastname;
-        this.company = company;
+        this.email = email;
         this.address = address;
-        this.mobile = mobile;
+        this.phone = phone;
         this.id = id;
     }
 
@@ -41,17 +27,19 @@ public class ContactData {
         return lastname;
     }
 
-    public String getCompany() {
-        return company;
+    public String getEmail() {
+        return email;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public String getMobile() {
-        return mobile;
+    public String getPhone() {
+        return phone;
     }
+
+    public int getId() { return id; }
 
     @Override
     public boolean equals(Object o) {
@@ -60,19 +48,56 @@ public class ContactData {
         ContactData that = (ContactData) o;
         return Objects.equals(firstname, that.firstname) &&
                 Objects.equals(lastname, that.lastname) &&
-                Objects.equals(company, that.company) &&
+                Objects.equals(email, that.email) &&
                 Objects.equals(address, that.address) &&
-                Objects.equals(mobile, that.mobile);
+                Objects.equals(phone, that.phone);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstname, lastname, company, address, mobile);
+        return Objects.hash(firstname, lastname, email, address, phone);
     }
 
-    public int getId() { return id; }
 
-    public void setId(int id) {
+    @Override
+    public String toString() {
+        return "ContactData{" +
+                "firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", id='" + id + '\'' +
+                '}';
+    }
+
+    public ContactData withId(int id) {
+
         this.id=id;
+        return this;
+    }
+    public ContactData withFirstname(String firstname) {
+        this.firstname = firstname;
+        return this;
+    }
+
+    public ContactData withLastname(String lastname) {
+        this.lastname = lastname;
+        return this;
+    }
+
+    public ContactData withEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public ContactData withAddress(String address) {
+        this.address = address;
+        return this;
+    }
+
+    public ContactData withPhone(String phone) {
+        this.phone = phone;
+        return this;
     }
 }

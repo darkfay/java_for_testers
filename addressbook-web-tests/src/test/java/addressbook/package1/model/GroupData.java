@@ -1,16 +1,42 @@
 package addressbook.package1.model;
 
 import java.util.Objects;
-import java.util.Optional;
 
 public class GroupData {
-    private final String groupName;
+    private String groupName;
+    private int id = Integer.MAX_VALUE;
 
-    public void setId(int id) {
-        this.id = id;
+//    public GroupData(int id, String groupName) {
+//        this.groupName = groupName;
+//        this.id = id;
+//    }
+//
+//
+//    public GroupData(String groupName) {
+//        this.groupName = groupName;
+//        this.id = Integer.MAX_VALUE;
+//    }
+
+    public String getGroupName() {
+
+        return groupName;
     }
 
-    private int id;
+    public int getId() {
+        return id;
+    }
+
+    public GroupData withId(int id)
+    {
+        this.id = id;
+        return this;
+    }
+
+    public GroupData withName(String groupName) {
+        this.groupName = groupName;
+        return this;
+    }
+
 
     @Override
     public String toString() {
@@ -20,9 +46,6 @@ public class GroupData {
                 '}';
     }
 
-    public int getId() {
-        return id;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -37,21 +60,6 @@ public class GroupData {
         return Objects.hash(groupName);
     }
 
-    public GroupData(int id, String groupName) {
-        this.groupName = groupName;
-        this.id = id;
-    }
 
 
-    public GroupData(String groupName) {
-        this.groupName = groupName;
-        this.id = Integer.MAX_VALUE;
-    }
-
-    public String getGroupName() {
-        return groupName;
-    }
-
-//    public void setId(Optional<GroupData> max) {
-//    }
 }
