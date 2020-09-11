@@ -1,6 +1,7 @@
 package addressbook.package1.appManager;
 
 import addressbook.package1.model.GroupData;
+import addressbook.package1.model.Groups;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -84,8 +85,8 @@ public class GroupHelper extends HelperBase {
     }
 
 
-    public Set<GroupData> all() {
-        Set<GroupData> groups = new HashSet<GroupData>();
+    public Groups all() {
+        Groups groups = new Groups();
         List<WebElement> elements = driver.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements) {
             String name = element.getText();

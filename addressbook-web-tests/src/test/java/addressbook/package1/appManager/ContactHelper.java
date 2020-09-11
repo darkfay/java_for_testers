@@ -39,8 +39,7 @@ public class ContactHelper extends HelperBase {
 
     public void editContact(ContactData contact, int index) {
         driver.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
-        type(By.name("firstname"), contact.getFirstname());
-        type(By.name("lastname"), contact.getLastname());
+        fillContact(contact);
         click(By.xpath("(//input[@name='update'])[2]"));
     }
 
@@ -76,7 +75,7 @@ public class ContactHelper extends HelperBase {
 //            String email = cells.get(5).getText();
 //            String phone = cells.get(6).getText();
             int id = Integer.parseInt(row.findElement(By.tagName("input")).getAttribute("value"));
-            ContactData contact = new ContactData (firstname, lastname, null, null, null, id);
+            ContactData contact = new ContactData(firstname, lastname, null, null, null, id);
             contacts.add(contact);
         }
         return contacts;
