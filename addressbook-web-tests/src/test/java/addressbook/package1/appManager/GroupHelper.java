@@ -26,6 +26,7 @@ public class GroupHelper extends HelperBase {
     }
 
     public void fillGroupForm(GroupData groupData) {
+
         type(By.name("group_name"), groupData.getGroupName());
     }
 
@@ -91,6 +92,7 @@ public class GroupHelper extends HelperBase {
         for (WebElement element : elements) {
             String name = element.getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+//            GroupData group = new GroupData().withId(id).withName(name);
             groups.add(new GroupData().withId(id).withName(name));
         }
         return groups;
