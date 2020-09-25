@@ -44,11 +44,7 @@ public class ContactHelper extends HelperBase {
 
 
     public void editContact(ContactData contact) {
-        selectContactByID(contact.getId());
-        List<WebElement> elements = driver.findElements(By.cssSelector("td input"));
-        WebElement element = getContactByID(contact.getId());
-        int index = elements.indexOf(element);
-        click(By.xpath("(//img[@alt='Edit'])[" + index + "]"));
+        initContactModificationById(contact.getId());
         fillContact(contact);
         click(By.xpath("(//input[@name='update'])[2]"));
     }
@@ -97,6 +93,30 @@ public class ContactHelper extends HelperBase {
 //            driver.findElement(By.linkText("home")).click();
         }
         return contacts;
+    }
+
+    public ContactData infoFromEditForm(ContactData contact) {
+        initContactModificationById(contact.getId());
+        String firstname = driver.findElement(By.name("firstname")).getAttribute("value");
+        String lastname = driver.findElement(By.name("lastname")).getAttribute("value");
+        String address = driver.findElement(By.name("address")).getAttribute("value");
+        String email = driver.findElement(By.name("email")).getAttribute("value");
+        String phone = driver.findElement(By.name("mobile")).getAttribute("value");
+        driver.navigate().back();
+        return new ContactData()
+                .withId(contact.getId())
+                .withAddress(address)
+                .withEmail(email)
+                .withFirstname(firstname)
+                .withLastname(lastname)
+                .withPhone(phone);
+        }
+
+        public void initContactModificationById(int id){
+        WebElement checkbox = driver.findElement(By.cssSelector(String.format("input[value='%s']", id)));
+        WebElement row = checkbox.findElement(By.xpath("./../.."));
+        List<WebElement> cells = row.findElements(By.tagName("td"));
+        cells.get(7).findElement(By.tagName("a")).click();
     }
 
 }
