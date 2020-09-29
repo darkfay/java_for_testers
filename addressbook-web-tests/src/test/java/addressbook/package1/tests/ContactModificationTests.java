@@ -22,7 +22,7 @@ public class ContactModificationTests extends Testbase {
                     .withLastname("DArk")
                     .withAddress(null)
                     .withEmail(null)
-                    .withPhone(null));
+                    .withMobilePhone(null));
         }
         Contacts before = app.getContactHelper().all();
         ContactData modifiedContact = before.iterator().next();
@@ -32,7 +32,7 @@ public class ContactModificationTests extends Testbase {
                 .withLastname("Bonapart")
                 .withAddress(null)
                 .withEmail(null)
-                .withPhone(null);
+                .withMobilePhone(null);
         app.getContactHelper().editContact(contact);
         app.goToHomePage();
         Contacts after = app.getContactHelper().all();

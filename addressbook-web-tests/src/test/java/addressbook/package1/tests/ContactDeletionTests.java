@@ -22,7 +22,7 @@ public class ContactDeletionTests extends Testbase {
                     .withLastname("D'Ark")
                     .withAddress(null)
                     .withEmail(null)
-                    .withPhone(null)
+                    .withMobilePhone(null)
                     .withId(0));
         }
         Contacts before = app.getContactHelper().all();

@@ -7,7 +7,40 @@ public class ContactData {
     private String lastname;
     private String email;
     private String address;
-    private String phone;
+    private String mobilePhone;
+    private String homePhone;
+    private String workPhone;
+    private String allPhones;
+    private String email2;
+    private String email3;
+
+    public ContactData withEmail3(String email3) {
+        this.email3 = email3;
+        return this;
+    }
+
+    public String getEmail3() {
+        return email3;
+    }
+
+    public ContactData withEmail2(String email2) {
+        this.email2 = email2;
+        return this;
+    }
+
+    public String getEmail2() {
+        return email2;
+    }
+
+    public ContactData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
+
+    public String getAllPhones() {
+        return allPhones;
+    }
+
     private int id = Integer.MAX_VALUE;
 
 //    public ContactData(String firstname, String lastname, String email, String address, String phone, int id) {
@@ -33,11 +66,13 @@ public class ContactData {
         return address;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
     public int getId() { return id; }
+
+    public String getMobilePhone() {return mobilePhone; };
+
+    public String getWorkPhone() {return workPhone; };
+
+    public String getHomePhone() {return homePhone; }
 
     public ContactData withId(int id) {
 
@@ -64,8 +99,18 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withPhone(String phone) {
-        this.phone = phone;
+    public ContactData withHomePhone(String homePhone) {
+        this.homePhone = homePhone;
+        return this;
+    }
+
+    public ContactData withWorkPhone(String workPhone) {
+        this.workPhone = workPhone;
+        return this;
+    }
+
+    public ContactData withMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
         return this;
     }
 
@@ -84,7 +129,7 @@ public class ContactData {
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstname, lastname, email, address, phone, id);
+        return Objects.hash(firstname, lastname, email, address, mobilePhone, id);
     }
 
 
@@ -97,7 +142,7 @@ public class ContactData {
                 ", lastname='" + lastname + '\'' +
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
+                ", phone='" + mobilePhone + '\'' +
                 ", id='" + id + '\'' +
                 '}';
     }

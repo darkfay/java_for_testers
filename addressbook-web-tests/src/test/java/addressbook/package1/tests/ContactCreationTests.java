@@ -22,7 +22,7 @@ public class ContactCreationTests extends Testbase {
                 .withLastname("DArk")
                 .withAddress(null)
                 .withEmail(null)
-                .withPhone(null);
+                .withMobilePhone(null);
         app.contactHelper.fillContact(contact);
         app.contactHelper.submitContact();
         app.goToHomePage();
