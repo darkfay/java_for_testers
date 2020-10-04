@@ -1,18 +1,36 @@
 package addressbook.package1.model;
 
+import com.google.gson.annotations.Expose;
+
+import java.io.File;
 import java.util.Objects;
 
 public class ContactData {
+    @Expose
     private String firstname;
+    @Expose
     private String lastname;
     private String email;
+    @Expose
     private String address;
+    @Expose
     private String mobilePhone;
     private String homePhone;
     private String workPhone;
     private String allPhones;
     private String email2;
     private String email3;
+
+    public ContactData withPhoto(File photo) {
+        this.photo = photo;
+        return this;
+    }
+
+    public File getPhoto() {
+        return photo;
+    }
+
+    private File photo;
 
     public ContactData withEmail3(String email3) {
         this.email3 = email3;
@@ -114,33 +132,13 @@ public class ContactData {
         return this;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ContactData that = (ContactData) o;
-        return id == that.id &&
-                Objects.equals(firstname, that.firstname) &&
-                Objects.equals(lastname, that.lastname);
-//                Objects.equals(email, that.email) &&
-//                Objects.equals(address, that.address) &&
-//                Objects.equals(phone, that.phone);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(firstname, lastname, email, address, mobilePhone, id);
-    }
-
-
-
 
     @Override
     public String toString() {
         return "ContactData{" +
                 "firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
-                ", email='" + email + '\'' +
+//                ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
                 ", phone='" + mobilePhone + '\'' +
                 ", id='" + id + '\'' +
@@ -148,4 +146,20 @@ public class ContactData {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactData that = (ContactData) o;
+        return id == that.id &&
+                Objects.equals(firstname, that.firstname) &&
+                Objects.equals(lastname, that.lastname) &&
+                Objects.equals(address, that.address) &&
+                Objects.equals(allPhones, that.allPhones);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstname, lastname, address, allPhones, id);
+    }
 }

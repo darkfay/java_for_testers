@@ -1,8 +1,11 @@
 package addressbook.package1.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.Objects;
 
 public class GroupData {
+    @Expose
     private String groupName;
     private int id = Integer.MAX_VALUE;
 

@@ -22,7 +22,6 @@ public class ContactHelper extends HelperBase {
     public void fillContact(ContactData contactData) {
         type(By.name("firstname"), contactData.getFirstname());
         type(By.name("lastname"), contactData.getLastname());
-        type(By.name("email"), contactData.getEmail());
         type(By.name("address"), contactData.getAddress());
         type(By.name("mobile"), contactData.getMobilePhone());
     }
@@ -79,15 +78,14 @@ public class ContactHelper extends HelperBase {
             String lastname = cells.get(1).getText();
             String address = cells.get(3).getText();
             String email = cells.get(4).getText();
-            String allPhones = cells.get(5).getText();
+            String mobilePhone = cells.get(5).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             contacts.add(new ContactData()
                     .withId(id)
                     .withFirstname(firstname)
                     .withLastname(lastname)
                     .withAddress(address)
-                    .withEmail(email)
-                    .withAllPhones(allPhones));
+                    .withMobilePhone(mobilePhone));
 //            driver.findElement(By.linkText("home")).click();
         }
         return contacts;

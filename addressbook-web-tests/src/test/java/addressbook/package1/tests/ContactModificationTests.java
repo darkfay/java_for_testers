@@ -19,10 +19,7 @@ public class ContactModificationTests extends Testbase {
         if (!app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContact(new ContactData()
                     .withFirstname("Zhanna")
-                    .withLastname("DArk")
-                    .withAddress(null)
-                    .withEmail(null)
-                    .withMobilePhone(null));
+                    .withLastname("DArk"));
         }
         Contacts before = app.getContactHelper().all();
         ContactData modifiedContact = before.iterator().next();
@@ -30,9 +27,7 @@ public class ContactModificationTests extends Testbase {
                 .withId(modifiedContact.getId())
                 .withFirstname("Napoleon")
                 .withLastname("Bonapart")
-                .withAddress(null)
-                .withEmail(null)
-                .withMobilePhone(null);
+                .withAddress("Paris");
         app.getContactHelper().editContact(contact);
         app.goToHomePage();
         Contacts after = app.getContactHelper().all();

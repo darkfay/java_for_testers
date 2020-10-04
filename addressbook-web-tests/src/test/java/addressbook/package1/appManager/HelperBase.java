@@ -24,7 +24,6 @@ public class HelperBase {
                 driver.findElement(locator).clear();
                 driver.findElement(locator).sendKeys(text);
             }
-
         }
 
 
