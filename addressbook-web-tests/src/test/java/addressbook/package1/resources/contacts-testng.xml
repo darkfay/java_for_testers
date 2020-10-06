@@ -1,0 +1,8 @@
+<suite name="Contacts" verbose="1" >
+
+    <test name="Contacts">
+        <classes>
+            <class name="addressbook.package1.tests.ContactCreationTests"/>
+        </classes>
+    </test>
+</suite>

@@ -1,19 +1,26 @@
 package addressbook.package1.appManager;
 
-import org.openqa.selenium.*;
-//import org.openqa.selenium.WebDriver;
+import jdk.jfr.events.FileReadEvent;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
-import java.io.File;
-import org.openqa.selenium.chrome.ChromeDriverService;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.fail;
 
 public class ApplicationManager {
+    private final Properties properties;
     public WebDriver driver;
     private SessionHelper sessionHelper;
     public ContactHelper contactHelper;
@@ -23,14 +30,16 @@ public class ApplicationManager {
     public StringBuffer verificationErrors = new StringBuffer();
     private String browser;
 
-    public ApplicationManager() {
-    }
 
-    public ApplicationManager(String browser) {
+    public ApplicationManager(String browser)  {
         this.browser = browser;
+        properties = new Properties();
+
     }
 
-    public void init() {
+    public void init() throws IOException {
+        String target = System.getProperty("target", "local");
+        properties.load(new FileReader(new File(String.format("src/test/java/addressbook/package1/resources/%s.properties", target))));
    
         if (browser.equals(BrowserType.FIREFOX)) {
             driver = new FirefoxDriver();
@@ -44,11 +53,11 @@ public class ApplicationManager {
         }
 //        baseUrl = "https://www.google.com/";
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        driver.get("http://localhost/addressbook");
+        driver.get(properties.getProperty("web.baseUrl"));
         groupHelper = new GroupHelper(driver);
         sessionHelper = new SessionHelper(driver);
         contactHelper = new ContactHelper(driver);
-        sessionHelper.login("admin", "secret");
+        sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
     }
 
 

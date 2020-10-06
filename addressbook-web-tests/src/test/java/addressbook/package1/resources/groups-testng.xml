@@ -1,0 +1,9 @@
+<suite name="Groups" verbose="1" >
+    <test name="Groups" >
+        <classes>
+            <class name="addressbook.package1.tests.GroupCreationTests" />
+<!--            <class name="addressbook.package1.tests.GroupModifikationTests" />-->
+<!--            <class name="addressbook.package1.tests.GroupDeletionTests" />-->
+        </classes>
+    </test>
+</suite>
