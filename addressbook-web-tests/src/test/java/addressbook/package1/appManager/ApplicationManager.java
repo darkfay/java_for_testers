@@ -29,6 +29,7 @@ public class ApplicationManager {
     public boolean acceptNextAlert = true;
     public StringBuffer verificationErrors = new StringBuffer();
     private String browser;
+    private DbHelper dbHelper;
 
 
     public ApplicationManager(String browser)  {
@@ -40,7 +41,9 @@ public class ApplicationManager {
     public void init() throws IOException {
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/java/addressbook/package1/resources/%s.properties", target))));
-   
+
+        dbHelper = new DbHelper();
+
         if (browser.equals(BrowserType.FIREFOX)) {
             driver = new FirefoxDriver();
         } else if (browser.equals(BrowserType.CHROME)) {
@@ -58,6 +61,7 @@ public class ApplicationManager {
         sessionHelper = new SessionHelper(driver);
         contactHelper = new ContactHelper(driver);
         sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
+
     }
 
 
@@ -98,10 +102,12 @@ public class ApplicationManager {
     }
 
     public GroupHelper group() {
+
         return groupHelper;
     }
 
     public ContactHelper getContactHelper() {
+
         return contactHelper;
     }
 
@@ -113,6 +119,10 @@ public class ApplicationManager {
     public void goToGroupPage() {
         driver.findElement(By.linkText("groups")).click();
 
+    }
+
+    public DbHelper db(){
+        return dbHelper;
     }
 
 }

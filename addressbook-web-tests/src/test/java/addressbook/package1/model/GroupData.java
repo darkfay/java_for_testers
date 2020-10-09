@@ -2,23 +2,23 @@ package addressbook.package1.model;
 
 import com.google.gson.annotations.Expose;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
+@Entity
+@Table(name="group_list")
 public class GroupData {
     @Expose
-    private String groupName;
-    private int id = Integer.MAX_VALUE;
 
-//    public GroupData(int id, String groupName) {
-//        this.groupName = groupName;
-//        this.id = id;
-//    }
-//
-//
-//    public GroupData(String groupName) {
-//        this.groupName = groupName;
-//        this.id = Integer.MAX_VALUE;
-//    }
+    @Column(name="group_name")
+    private String groupName;
+
+    @Id
+    @Column(name="group_id")
+    private int id = Integer.MAX_VALUE;
 
     public String getGroupName() { return groupName; }
 

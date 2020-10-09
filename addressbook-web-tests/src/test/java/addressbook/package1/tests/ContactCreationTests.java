@@ -52,7 +52,7 @@ public class ContactCreationTests extends Testbase {
     @Test(dataProvider = "validContactsFromJson")
     public void testContactCreationTests(ContactData contact) throws Exception {
         app.goToHomePage();
-        Contacts before = app.getContactHelper().all();
+        Contacts before = app.db().contacts();
         app.contactHelper.goToAddNewPage();
 //        ContactData contact = new ContactData()
 //                .withFirstname("Zhanna")
@@ -60,7 +60,7 @@ public class ContactCreationTests extends Testbase {
         app.contactHelper.fillContact(contact);
         app.contactHelper.submitContact();
         app.goToHomePage();
-        Contacts after = app.getContactHelper().all();
+        Contacts after = app.db().contacts();
         assertThat(after.size(), equalTo(before.size() +1));
 
         contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt());

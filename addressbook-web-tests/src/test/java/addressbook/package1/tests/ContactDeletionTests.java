@@ -16,22 +16,18 @@ public class ContactDeletionTests extends Testbase {
     @Test
     public void testContactDeletion() throws Exception {
         app.goToHomePage();
-        if (!app.getContactHelper().isThereAContact()) {
+        if (app.db().contacts().size() == 0) {
             app.getContactHelper().createContact(new ContactData()
                     .withFirstname("Zhanna")
-                    .withLastname("D'Ark")
-                    .withAddress(null)
-                    .withEmail(null)
-                    .withMobilePhone(null)
-                    .withId(0));
+                    .withLastname("DArk"));
         }
-        Contacts before = app.getContactHelper().all();
+        Contacts before = app.db().contacts();
         ContactData deletedContact = before.iterator().next();
         app.getContactHelper().selectContactByID(deletedContact.getId());
         app.getContactHelper().deleteSelectedContacts();
         app.driver.switchTo().alert().accept();
         app.goToHomePage();
-        Contacts after = app.getContactHelper().all();
+        Contacts after = app.db().contacts();
         assertEquals(after.size(), before.size()-1);
         assertThat(after, equalTo(before.without(deletedContact)));
 

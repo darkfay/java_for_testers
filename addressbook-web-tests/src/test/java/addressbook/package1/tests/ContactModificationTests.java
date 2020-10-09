@@ -2,6 +2,7 @@ package addressbook.package1.tests;
 
 import addressbook.package1.model.ContactData;
 import addressbook.package1.model.Contacts;
+import addressbook.package1.model.GroupData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -16,21 +17,23 @@ public class ContactModificationTests extends Testbase {
     @Test
     public void testContactModification() throws Exception {
         app.goToHomePage();
-        if (!app.getContactHelper().isThereAContact()) {
+        if (app.db().contacts().size() == 0) {
             app.getContactHelper().createContact(new ContactData()
                     .withFirstname("Zhanna")
                     .withLastname("DArk"));
         }
-        Contacts before = app.getContactHelper().all();
+
+        Contacts before = app.db().contacts();
         ContactData modifiedContact = before.iterator().next();
         ContactData contact = new ContactData()
                 .withId(modifiedContact.getId())
-                .withFirstname("Napoleon")
-                .withLastname("Bonapart")
-                .withAddress("Paris");
+                .withFirstname("Neon")
+                .withLastname("Bart")
+                .withAddress("Pis")
+                .withMobilePhone("21");
         app.getContactHelper().editContact(contact);
         app.goToHomePage();
-        Contacts after = app.getContactHelper().all();
+        Contacts after = app.db().contacts();
         assertEquals(after.size(), before.size());
         assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
 
