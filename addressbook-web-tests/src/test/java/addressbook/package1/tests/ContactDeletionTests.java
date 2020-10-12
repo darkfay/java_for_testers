@@ -2,10 +2,7 @@ package addressbook.package1.tests;
 
 import addressbook.package1.model.ContactData;
 import addressbook.package1.model.Contacts;
-import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -17,14 +14,14 @@ public class ContactDeletionTests extends Testbase {
     public void testContactDeletion() throws Exception {
         app.goToHomePage();
         if (app.db().contacts().size() == 0) {
-            app.getContactHelper().createContact(new ContactData()
+            app.contact().createContact(new ContactData()
                     .withFirstname("Zhanna")
                     .withLastname("DArk"));
         }
         Contacts before = app.db().contacts();
         ContactData deletedContact = before.iterator().next();
-        app.getContactHelper().selectContactByID(deletedContact.getId());
-        app.getContactHelper().deleteSelectedContacts();
+        app.contact().selectContactByID(deletedContact.getId());
+        app.contact().deleteSelectedContacts();
         app.driver.switchTo().alert().accept();
         app.goToHomePage();
         Contacts after = app.db().contacts();

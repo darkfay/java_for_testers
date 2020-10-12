@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import javax.naming.Name;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
@@ -123,6 +124,12 @@ public class ContactHelper extends HelperBase {
         WebElement row = checkbox.findElement(By.xpath("./../.."));
         List<WebElement> cells = row.findElements(By.tagName("td"));
         cells.get(7).findElement(By.tagName("a")).click();
+    }
+
+
+
+    public void addGroupToContact() {
+        driver.findElement(By.name("add")).click();
     }
 
 }

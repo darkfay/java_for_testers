@@ -2,11 +2,7 @@ package addressbook.package1.tests;
 
 import addressbook.package1.model.ContactData;
 import addressbook.package1.model.Contacts;
-import addressbook.package1.model.GroupData;
-import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -18,7 +14,7 @@ public class ContactModificationTests extends Testbase {
     public void testContactModification() throws Exception {
         app.goToHomePage();
         if (app.db().contacts().size() == 0) {
-            app.getContactHelper().createContact(new ContactData()
+            app.contact().createContact(new ContactData()
                     .withFirstname("Zhanna")
                     .withLastname("DArk"));
         }
@@ -31,7 +27,7 @@ public class ContactModificationTests extends Testbase {
                 .withLastname("Bart")
                 .withAddress("Pis")
                 .withMobilePhone("21");
-        app.getContactHelper().editContact(contact);
+        app.contact().editContact(contact);
         app.goToHomePage();
         Contacts after = app.db().contacts();
         assertEquals(after.size(), before.size());
