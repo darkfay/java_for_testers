@@ -1,0 +1,31 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.testng:testng:7.1.0'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.0.0-alpha-6'
+    testImplementation 'org.hamcrest:hamcrest:2.2'
+
+}
+
+dependencies {
+
+}
+
+test {
+    useTestNG {
+        suites 'src/test/java/addressbook/package1/resources/testng.xml'
+    }
+    if (project.hasProperty('browser')){
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('target')){
+        systemProperty 'target', "${target}"
+    }
+
+}
+
+
