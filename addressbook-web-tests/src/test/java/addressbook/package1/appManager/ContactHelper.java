@@ -2,9 +2,11 @@ package addressbook.package1.appManager;
 
 import addressbook.package1.model.ContactData;
 import addressbook.package1.model.Contacts;
+import addressbook.package1.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import javax.naming.Name;
 import java.util.List;
@@ -87,7 +89,6 @@ public class ContactHelper extends HelperBase {
                     .withLastname(lastname)
                     .withAddress(address)
                     .withMobilePhone(mobilePhone));
-//            driver.findElement(By.linkText("home")).click();
         }
         return contacts;
     }
@@ -128,8 +129,27 @@ public class ContactHelper extends HelperBase {
 
 
 
-    public void addGroupToContact() {
+    public void addGroup() {
         driver.findElement(By.name("add")).click();
     }
+
+    public void addContactToGroup(ContactData contact, GroupData group) {
+        selectContactByID(contact.getId());
+        new Select(driver.findElement(By.name("to_group"))).selectByValue(Integer.toString(group.getId()));
+        addGroup();
+    }
+
+
+    public void deleteContactFromGroup(ContactData contact, GroupData group) {
+        new Select(driver.findElement(By.name("group"))).selectByValue(Integer.toString(group.getId()));
+        selectContactByID(contact.getId());
+        DeleteFromGroup();
+    }
+
+
+    private void DeleteFromGroup() {
+        driver.findElement(By.name("remove")).click();
+    }
+
 
 }

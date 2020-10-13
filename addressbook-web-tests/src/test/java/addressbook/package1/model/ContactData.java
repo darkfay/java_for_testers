@@ -59,21 +59,23 @@ public class ContactData {
         return id == that.id &&
                 Objects.equals(firstname, that.firstname) &&
                 Objects.equals(lastname, that.lastname) &&
-                Objects.equals(email, that.email) &&
                 Objects.equals(address, that.address) &&
                 Objects.equals(mobilePhone, that.mobilePhone);
+//                Objects.equals(groups, that.groups);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstname, lastname, email, address, mobilePhone);
+        return Objects.hash(id, firstname, lastname, address, mobilePhone, groups);
     }
-
-
-
 
     public Groups getGroups() {
         return new Groups(groups);
+    }
+
+    public ContactData inGroup(GroupData group) {
+        groups.add(group);
+        return this;
     }
 
     public ContactData withPhoto(File photo) {

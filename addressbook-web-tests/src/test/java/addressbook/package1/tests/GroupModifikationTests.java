@@ -20,7 +20,7 @@ public class GroupModifikationTests extends Testbase {
         }
     }
 
-    @Test
+    @Test(enabled = false)
     public void testGroupModifikation() {
         Groups before = app.db().groups();
         GroupData modifiedGroup = before.iterator().next();
